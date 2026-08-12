@@ -1,19 +1,18 @@
-'use client';
+"use client";
 
-import { useCallback, useRef, useState } from 'react';
-
-import { EASE, gsap, ScrollTrigger } from '@/animations/core';
-import { useCursorTarget } from '@/components/providers/CursorProvider';
-import { useLoader } from '@/components/providers/LoaderProvider';
-import { useSmoothScroll } from '@/components/providers/SmoothScrollProvider';
-import { MobileMenu } from '@/components/layout/MobileMenu';
-import { MagneticButton } from '@/components/ui/MagneticButton';
-import { Monogram } from '@/components/ui/Monogram';
-import { NAV_ITEMS } from '@/constants/navigation';
-import { SITE } from '@/constants/site';
-import { useActiveSection } from '@/hooks/useActiveSection';
-import { useGsapScope } from '@/hooks/useGsapScope';
-import { cn, prefersReducedMotion } from '@/lib/utils';
+import { useCallback, useRef, useState } from "react";
+import { EASE, gsap, ScrollTrigger } from "@/animations/core";
+import { useCursorTarget } from "@/components/providers/CursorProvider";
+import { useLoader } from "@/components/providers/LoaderProvider";
+import { useSmoothScroll } from "@/components/providers/SmoothScrollProvider";
+import { MobileMenu } from "@/components/layout/MobileMenu";
+import { MagneticButton } from "@/components/ui/MagneticButton";
+import { Monogram } from "@/components/ui/Monogram";
+import { NAV_ITEMS } from "@/constants/navigation";
+import { SITE } from "@/constants/site";
+import { useActiveSection } from "@/hooks/useActiveSection";
+import { useGsapScope } from "@/hooks/useGsapScope";
+import { cn, prefersReducedMotion } from "@/lib/utils";
 
 const SECTION_IDS = NAV_ITEMS.map((item) => item.id);
 
@@ -25,7 +24,7 @@ export function Navbar() {
 
   const barRef = useRef<HTMLDivElement>(null);
   const logoMarkRef = useRef<SVGSVGElement>(null);
-  const linkCursor = useCursorTarget('link');
+  const linkCursor = useCursorTarget("link");
 
   const navigate = useCallback(
     (id: string) => {
@@ -47,7 +46,13 @@ export function Navbar() {
       gsap.set(root, { autoAlpha: 0, y: -28 });
 
       if (hasRevealed) {
-        gsap.to(root, { autoAlpha: 1, y: 0, duration: 1.2, delay: 0.35, ease: EASE.luxe });
+        gsap.to(root, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 1.2,
+          delay: 0.35,
+          ease: EASE.luxe,
+        });
       }
 
       // Glass + border only once the page has actually moved.
@@ -60,10 +65,10 @@ export function Navbar() {
       if (!bar) return;
 
       const trigger = ScrollTrigger.create({
-        start: 'top -80',
+        start: "top -80",
         end: 99999,
         onToggle: (self) => {
-          bar.dataset.condensed = self.isActive ? 'true' : 'false';
+          bar.dataset.condensed = self.isActive ? "true" : "false";
         },
       });
 
@@ -74,12 +79,22 @@ export function Navbar() {
 
   const handleLogoEnter = () => {
     if (prefersReducedMotion()) return;
-    gsap.to(logoMarkRef.current, { rotate: 180, scale: 1.1, duration: 0.9, ease: EASE.drama });
+    gsap.to(logoMarkRef.current, {
+      rotate: 180,
+      scale: 1.1,
+      duration: 0.9,
+      ease: EASE.drama,
+    });
   };
 
   const handleLogoLeave = () => {
     if (prefersReducedMotion()) return;
-    gsap.to(logoMarkRef.current, { rotate: 0, scale: 1, duration: 0.9, ease: EASE.drama });
+    gsap.to(logoMarkRef.current, {
+      rotate: 0,
+      scale: 1,
+      duration: 0.9,
+      ease: EASE.drama,
+    });
   };
 
   return (
@@ -95,7 +110,7 @@ export function Navbar() {
               href="#hero"
               onClick={(event) => {
                 event.preventDefault();
-                navigate('hero');
+                navigate("hero");
               }}
               className="group flex items-center gap-3"
               aria-label={`${SITE.name} — back to top`}
@@ -135,14 +150,14 @@ export function Navbar() {
                         event.preventDefault();
                         navigate(item.id);
                       }}
-                      aria-current={isActive ? 'true' : undefined}
+                      aria-current={isActive ? "true" : undefined}
                       className="group relative flex items-center gap-2 px-4 py-2"
                       {...linkCursor}
                     >
                       <span
                         className={cn(
-                          'font-mono text-[0.55rem] transition-colors duration-500',
-                          isActive ? 'text-gold' : 'text-fog',
+                          "font-mono text-[0.55rem] transition-colors duration-500",
+                          isActive ? "text-gold" : "text-fog",
                         )}
                       >
                         {item.index}
@@ -152,8 +167,8 @@ export function Navbar() {
                         {/* Two stacked labels — a clean roll on hover. */}
                         <span
                           className={cn(
-                            'block text-[0.72rem] uppercase tracking-[0.16em] transition-[transform,color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-full',
-                            isActive ? 'text-bone' : 'text-mist',
+                            "block text-[0.72rem] uppercase tracking-[0.16em] transition-[transform,color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-full",
+                            isActive ? "text-bone" : "text-mist",
                           )}
                         >
                           {item.label}
@@ -169,8 +184,10 @@ export function Navbar() {
                         <span
                           aria-hidden="true"
                           className={cn(
-                            'absolute inset-x-0 bottom-0 h-px origin-left bg-gold transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
-                            isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
+                            "absolute inset-x-0 bottom-0 h-px origin-left bg-gold transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                            isActive
+                              ? "scale-x-100"
+                              : "scale-x-0 group-hover:scale-x-100",
                           )}
                         />
                       </span>
@@ -188,7 +205,7 @@ export function Navbar() {
                 className="hidden md:inline-flex"
                 onClick={(event) => {
                   event.preventDefault();
-                  navigate('contact');
+                  navigate("contact");
                 }}
               >
                 Start a project
@@ -200,23 +217,25 @@ export function Navbar() {
                 onClick={() => setMenuOpen((open) => !open)}
                 aria-expanded={menuOpen}
                 aria-controls="mobile-menu"
-                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
                 className="group relative flex h-11 w-11 items-center justify-center rounded-full border border-hairline transition-colors duration-500 hover:border-gold/60 lg:hidden"
                 {...linkCursor}
               >
-                <span className="sr-only">{menuOpen ? 'Close menu' : 'Open menu'}</span>
+                <span className="sr-only">
+                  {menuOpen ? "Close menu" : "Open menu"}
+                </span>
                 <span
                   aria-hidden="true"
                   className={cn(
-                    'absolute h-px w-4 bg-bone transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
-                    menuOpen ? 'translate-y-0 rotate-45' : '-translate-y-1',
+                    "absolute h-px w-4 bg-bone transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                    menuOpen ? "translate-y-0 rotate-45" : "-translate-y-1",
                   )}
                 />
                 <span
                   aria-hidden="true"
                   className={cn(
-                    'absolute h-px w-4 bg-bone transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]',
-                    menuOpen ? 'translate-y-0 -rotate-45' : 'translate-y-1',
+                    "absolute h-px w-4 bg-bone transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                    menuOpen ? "translate-y-0 -rotate-45" : "translate-y-1",
                   )}
                 />
               </button>
