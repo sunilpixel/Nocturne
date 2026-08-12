@@ -2,11 +2,11 @@
   "name": "nocturne-atelier",
   "version": "1.0.0",
   "private": true,
-  "description": "NOCTURNE — an ultra-luxury, cinematic web experience built with Next.js, GSAP & Lenis.",
+  "description": "NOCTURNE \u2014 an ultra-luxury, cinematic web experience built with Next.js, GSAP & Lenis.",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node init && next dev",
+    "build": "node init && next build",
+    "start": "node init && next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "gen:art": "node scripts/build-artwork.mjs"
